@@ -15,9 +15,7 @@ function ds_enqueue_assets() {
   wp_enqueue_script( 'bootstrap-cdn', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), null, true );
 
   // Threaded comments only where needed
-  if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-    wp_enqueue_script( 'comment-reply' );
-  }
+ 
 }
 add_action( 'wp_enqueue_scripts', 'ds_enqueue_assets' );
 
@@ -34,20 +32,35 @@ function ds_setup() {
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'post-formats', array( 'aside', 'image', 'video' ) );
 }
+
 add_action( 'init', 'ds_setup' );
 
-function ds_widgets_init() {
-  register_sidebar( array(
-    'name'  =>('Primary Sidebar', 'ds theme'),
-    'id'    =>'primary',
-    'description' =>__('Main Sidebar that appear on the right','ds theme'),
+function ds_widgets_init(){
+  register_sidebar(array(
+    'name' =>('Primary Sidebar','ds theme'),
+    'id'=>'primary',
+    'description' => __('Main Sidebar that appers on the right','ds theme'),
     'class' => 'side-primary',
-    'before_widget'  =>'<aside id="%1$" class="widget %2$s">',
+    'before_widget' =>'aside id="%1$" class="widget %2$s">',
     'after_widget' =>'</aside>',
-    'before_title' => 'h3 class= "widget-title">',
-    'after_title' =
+    'before_title' => '<h3 class="widget_title">',
+    'after_title' => '</h3>',
 
-      )
-  )
 
+  ));
+  function ds_widgets_init(){
+  register_sidebar(array(
+    'name' =>('Secondary Sidebar','ds theme'),
+    'id'=>'secondary',
+    'description' => __('Main Sidebar that appers on the right','ds theme'),
+    'class' => 'side-primary',
+    'before_widget' =>'aside id="%1$" class="widget %2$s">',
+    'after_widget' =>'</aside>',
+    'before_title' => '<h3 class="widget_title">',
+    'after_title' => '</h3>',
+
+
+  ));
 }
+
+add_action( 'widgets_init', 'ds_setup' );
