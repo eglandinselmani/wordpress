@@ -27,3 +27,23 @@ function ds_setup() {
   add_theme_support( 'post-formats', array( 'aside', 'image', 'video' ) );
 }
 add_action( 'init', 'ds_setup' );
+
+
+
+
+function mytheme_pagination(
+  $query = null, $args = array()){
+
+
+    if($query instanceof WP_Query){
+      $q = $query;
+    }else {
+      global $wp_query;
+      $q=$wp_query;
+    }
+
+    if(empty($q->max_numpages)  || $q->max_numpages<2  ){
+      return;
+    }
+
+}
